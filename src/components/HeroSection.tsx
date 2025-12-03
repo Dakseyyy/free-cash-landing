@@ -7,42 +7,41 @@ const HeroSection = () => {
       {/* Background glow effects */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/20 rounded-full blur-3xl" />
-      
+
       <div className="container relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border mb-8 animate-fade-up">
             <Sparkles className="w-4 h-4 text-secondary" />
             <span className="text-sm font-medium">$5M+ paid out to real users</span>
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 animate-fade-up animation-delay-200">
             Get Paid to{" "}
             <span className="gradient-text">Take Surveys</span>{" "}
             & Play Games
           </h1>
-          
+
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl mx-auto animate-fade-up animation-delay-400">
             Join millions earning real cash rewards. Average users earn their first $5 in just 5 minutes.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up animation-delay-600">
-            <Button variant="hero" size="xl" className="w-full sm:w-auto">
-              Claim Your $5 Bonus
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-            <Button variant="outline" size="xl" className="w-full sm:w-auto">
-              See How It Works
-            </Button>
+            <a
+              href="https://gloffers.org/aff_c?offer_id=3532&aff_id=158638"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="hero" size="xl">
+                Get Started
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </a>
+
           </div>
-          
+
           <div className="mt-12 flex items-center justify-center gap-2 animate-fade-up animation-delay-600">
             <div className="flex -space-x-2">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div
-                  key={i}
-                  className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/50 to-secondary/50 border-2 border-background"
-                />
-              ))}
+
             </div>
             <div className="flex items-center gap-1 ml-2">
               {[1, 2, 3, 4, 5].map((i) => (

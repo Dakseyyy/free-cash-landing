@@ -4,7 +4,7 @@ const steps = [
   {
     icon: UserPlus,
     step: "01",
-    title: "Sign Up Free",
+    title: "Sign Up For Free",
     description: "Create your account in seconds and instantly receive your $5 welcome bonus.",
   },
   {
@@ -36,7 +36,7 @@ const HowItWorksSection = () => {
         
         <div className="grid md:grid-cols-3 gap-8 relative">
           {/* Connector line */}
-          <div className="hidden md:block absolute top-20 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-primary via-secondary to-primary" />
+         
           
           {steps.map((item, index) => (
             <div key={item.step} className="relative">
