@@ -5,13 +5,13 @@ const steps = [
     icon: UserPlus,
     step: "01",
     title: "Sign Up For Free",
-    description: "Create your account in seconds and instantly receive your $5 welcome bonus.",
+    description: "Create your account in seconds and instantly start earning!",
   },
   {
     icon: ListChecks,
     step: "02",
     title: "Complete Tasks",
-    description: "Take surveys, play games, watch videos, or try new apps. Choose what you enjoy!",
+    description: "Take surveys, play games, complete surveys, or try new apps. Choose what you enjoy!",
   },
   {
     icon: Wallet,

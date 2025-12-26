@@ -17,7 +17,7 @@ const CTASection = () => {
           <div className="relative z-10 px-8 py-16 md:py-24 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 border border-secondary/30 mb-6">
               <Gift className="w-5 h-5 text-secondary" />
-              <span className="font-semibold text-secondary">Limited Time: $5 Signup Bonus</span>
+              
             </div>
 
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 max-w-3xl mx-auto">
@@ -30,7 +30,7 @@ const CTASection = () => {
             </p>
 
             <a
-              href="https://gloffers.org/aff_c?offer_id=3532&aff_id=158638"
+              href="https://gloffers.org/aff_c?offer_id=3273&aff_id=158638"
               target="_blank"
               rel="noopener noreferrer"
             >

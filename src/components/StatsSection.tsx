@@ -1,23 +1,18 @@
 import { DollarSign, Clock, Users, Star } from "lucide-react";
 
 const stats = [
-  {
-    icon: DollarSign,
-    value: "$5M+",
-    label: "Paid Out",
-    description: "Real cash to real users",
-  },
+  
   {
     icon: Clock,
-    value: "5 min",
-    label: "To First $5",
-    description: "Average time to earn",
+    value: "7 min",
+    label: "To First Cashout",
+    description: "The average time before your first cashout",
   },
   {
     icon: Users,
-    value: "$5",
-    label: "Sign Up Bonus",
-    description: "Free money to start",
+    value: "10M+",
+    label: "Downloads",
+    description: "Join the huge community today.",
   },
   {
     icon: Star,
@@ -32,7 +27,7 @@ const StatsSection = () => {
     <section className="py-20 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/50 to-transparent" />
       <div className="container relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
           {stats.map((stat, index) => (
             <div
               key={stat.label}

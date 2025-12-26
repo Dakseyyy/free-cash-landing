@@ -27,9 +27,18 @@ const HeroSection = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up animation-delay-600">
             <a
-              href="https://gloffers.org/aff_c?offer_id=3532&aff_id=158638"
+              href="https://gloffers.org/aff_c?offer_id=3273&aff_id=158638"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                // This fires the 'View Content' event right before they leave
+                if ((window as any).snaptr) {
+                  (window as any).snaptr('track', 'VIEW_CONTENT', {
+                    'content_ids': ['3273'], // Optional: Keeps track of which offer they clicked
+                    'content_type': 'product'
+                  });
+                }
+              }}
             >
               <Button variant="hero" size="xl">
                 Get Started
