@@ -1,7 +1,26 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { useSearchParams } from "react-router-dom"; // Essential import
 
 const HeroSection = () => {
+  const [searchParams] = useSearchParams();
+
+  // 1. Get Snapchat ID from URL (e.g., ?ScCid=555)
+  const snapClickId = searchParams.get("ScCid") || searchParams.get("sc_click_id") || "";
+
+  // 2. Add it to 'aff_sub' (The "Backpack" for Gloffers)
+  const affiliateLink = `https://gloffers.org/aff_c?offer_id=3273&aff_id=158638&aff_sub=${snapClickId}`;
+
+  const handleTrackClick = () => {
+    // Fire Pixel 'View Content'
+    if ((window as any).snaptr) {
+      (window as any).snaptr('track', 'VIEW_CONTENT', {
+        'content_ids': ['3273'],
+        'content_type': 'product'
+      });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
       {/* Background glow effects */}
@@ -27,31 +46,20 @@ const HeroSection = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up animation-delay-600">
             <a
-              href="https://gloffers.org/aff_c?offer_id=3273&aff_id=158638"
+              href={affiliateLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => {
-                // This fires the 'View Content' event right before they leave
-                if ((window as any).snaptr) {
-                  (window as any).snaptr('track', 'VIEW_CONTENT', {
-                    'content_ids': ['3273'], // Optional: Keeps track of which offer they clicked
-                    'content_type': 'product'
-                  });
-                }
-              }}
+              onClick={handleTrackClick}
             >
               <Button variant="hero" size="xl">
                 Get Started
                 <ArrowRight className="w-5 h-5" />
               </Button>
             </a>
-
           </div>
 
+          {/* Social Proof Section */}
           <div className="mt-12 flex items-center justify-center gap-2 animate-fade-up animation-delay-600">
-            <div className="flex -space-x-2">
-
-            </div>
             <div className="flex items-center gap-1 ml-2">
               {[1, 2, 3, 4, 5].map((i) => (
                 <svg key={i} className="w-4 h-4 text-secondary fill-current" viewBox="0 0 20 20">
