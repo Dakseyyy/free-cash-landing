@@ -9,17 +9,9 @@ const HeroSection = () => {
   const snapClickId = searchParams.get("ScCid") || searchParams.get("sc_click_id") || "";
 
   // 2. Add it to 'aff_sub' (The "Backpack" for Gloffers)
-  const affiliateLink = `https://gloffers.org/aff_c?offer_id=3273&aff_id=158638&aff_sub=${snapClickId}`;
+  const affiliateLink = `https://quickflarehit.com/cf/click/2`;
 
-  const handleTrackClick = () => {
-    // Fire Pixel 'View Content'
-    if ((window as any).snaptr) {
-      (window as any).snaptr('track', 'VIEW_CONTENT', {
-        'content_ids': ['3273'],
-        'content_type': 'product'
-      });
-    }
-  };
+  
 
   return (
     <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
@@ -49,7 +41,7 @@ const HeroSection = () => {
               href={affiliateLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleTrackClick}
+
             >
               <Button variant="hero" size="xl">
                 Get Started
