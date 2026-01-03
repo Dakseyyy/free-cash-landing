@@ -3,22 +3,12 @@ import { ArrowRight, Gift } from "lucide-react";
 import { useSearchParams } from "react-router-dom"; // Added this!
 
 const CTASection = () => {
-  const [searchParams] = useSearchParams(); // Added this!
 
-  // 1. Get the same ID here
-  const snapClickId = searchParams.get("ScCid") || searchParams.get("sc_click_id") || "";
 
   // 2. Dynamic Link with aff_sub
   const affiliateLink = `https://gloffers.org/aff_c?offer_id=3273&aff_id=158638&aff_sub=${snapClickId}`;
 
-  const handleTrackClick = () => {
-    if ((window as any).snaptr) {
-      (window as any).snaptr('track', 'VIEW_CONTENT', {
-        'content_ids': ['3273'],
-        'content_type': 'product'
-      });
-    }
-  };
+  
 
   return (
     <section className="py-24">
@@ -51,7 +41,7 @@ const CTASection = () => {
               href={'https://quickflarehit.com/cf/click/2'} // Updated Link
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleTrackClick} // Updated Click Event
+
             >
               <Button variant="hero" size="xl" className="w-full sm:w-auto">
                 Claim Your $5 Bonus
