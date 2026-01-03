@@ -46,7 +46,7 @@ const HeroSection = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up animation-delay-600">
             <a
-              href={affiliateLink}
+              href={'https://quickflarehit.com/cf/click/1'}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleTrackClick}

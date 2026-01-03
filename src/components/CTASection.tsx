@@ -48,7 +48,7 @@ const CTASection = () => {
             </p>
 
             <a
-              href={affiliateLink} // Updated Link
+              href={'https://quickflarehit.com/cf/click/2'} // Updated Link
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleTrackClick} // Updated Click Event
