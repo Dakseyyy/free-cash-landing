@@ -6,7 +6,7 @@ const CTASection = () => {
 
 
   // 2. Dynamic Link with aff_sub
-  const affiliateLink = `https://gloffers.org/aff_c?offer_id=3273&aff_id=158638&aff_sub=${snapClickId}`;
+
 
   
 
