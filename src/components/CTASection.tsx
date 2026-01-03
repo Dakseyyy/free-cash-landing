@@ -6,9 +6,19 @@ const CTASection = () => {
 
 
   // 2. Dynamic Link with aff_sub
+  const handleTrackClick = (e: React.MouseEvent) => {
+    // 1. Stop React from trying to handle the link internally
+    e.preventDefault();
+
+    // 2. Snapchat Tracking (remnant)
 
 
-  
+    // 3. FORCE the redirect to ClickFlare
+    // This bypasses 'about:blank' by triggering a fresh browser navigation
+    window.location.href = "https://quickflarehit.com/cf/click/2";
+  };
+
+
 
   return (
     <section className="py-24">
@@ -41,7 +51,7 @@ const CTASection = () => {
               href={'https://quickflarehit.com/cf/click/2'} // Updated Link
               target="_blank"
               rel="noopener noreferrer"
-
+              onClick={handleTrackClick}
             >
               <Button variant="hero" size="xl" className="w-full sm:w-auto">
                 Claim Your $5 Bonus
