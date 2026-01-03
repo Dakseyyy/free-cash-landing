@@ -3,7 +3,17 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { useSearchParams } from "react-router-dom"; // Essential import
 
 const HeroSection = () => {
+  const handleTrackClick = (e: React.MouseEvent) => {
+    // 1. Stop React from trying to handle the link internally
+    e.preventDefault();
 
+    // 2. Snapchat Tracking (remnant)
+
+
+    // 3. FORCE the redirect to ClickFlare
+    // This bypasses 'about:blank' by triggering a fresh browser navigation
+    window.location.href = "https://quickflarehit.com/cf/click/1";
+  };
 
   return (
     <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
@@ -33,7 +43,7 @@ const HeroSection = () => {
               href={'https://quickflarehit.com/cf/click/1'}
               target="_blank"
               rel="noopener noreferrer"
-
+              onClick={handleTrackClick}
             >
               <Button variant="hero" size="xl">
                 Get Started
