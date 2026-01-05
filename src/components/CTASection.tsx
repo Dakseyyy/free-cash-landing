@@ -1,24 +1,55 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Gift } from "lucide-react";
-import { useSearchParams } from "react-router-dom"; // Added this!
+import { useSearchParams } from "react-router-dom";
+
+// ⚠️ PASTE YOUR TIKTOK ACCESS TOKEN HERE
+const TIKTOK_ACCESS_TOKEN = "389eb2f05805015f2151bba7b8f8cfbb446dfd79"; 
 
 const CTASection = () => {
+  const [searchParams] = useSearchParams();
+  
+  // 1. Get the ttclid from the URL
+  const ttclid = searchParams.get("ttclid");
 
+  // 2. Construct the Affiliate Link dynamically
+  const baseUrl = "https://gloffers.org/aff_c?offer_id=3273&aff_id=158638";
+  // We append ttclid to 'aff_sub' and 'ttclid' so the network catches it
+  const affiliateLink = ttclid 
+    ? `${baseUrl}&aff_sub=${ttclid}&ttclid=${ttclid}` 
+    : baseUrl;
 
-  // 2. Dynamic Link with aff_sub
-  const handleTrackClick = (e: React.MouseEvent) => {
-    // 1. Stop React from trying to handle the link internally
-    e.preventDefault();
+  // 3. Direct Browser-to-TikTok API Call
+  const handleButtonClick = async () => {
+    const eventPayload = {
+      event_source: "web",
+      event_source_id: "D5DOJBJC77UEMHG8RJK0", 
+      data: [
+        {
+          event: "ViewContent",
+          event_time: Math.floor(Date.now() / 1000), // Current Unix Timestamp
+          event_id: crypto.randomUUID(), // Random ID for deduplication
+          user: {
+            ttclid: ttclid || null 
+          }
+        }
+      ]
+    };
 
-    // 2. Snapchat Tracking (remnant)
-
-
-    // 3. FORCE the redirect to ClickFlare
-    // This bypasses 'about:blank' by triggering a fresh browser navigation
-    window.location.href = "https://quickflarehit.com/cf/click/2";
+    try {
+      // Sending directly to TikTok Business API
+      await fetch("https://business-api.tiktok.com/open_api/v1.3/event/track/", {
+        method: "POST",
+        headers: {
+          "Access-Token": TIKTOK_ACCESS_TOKEN,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eventPayload),
+      });
+      console.log("TikTok event sent successfully");
+    } catch (error) {
+      console.error("Failed to send TikTok event", error);
+    }
   };
-
-
 
   return (
     <section className="py-24">
@@ -48,10 +79,10 @@ const CTASection = () => {
             </p>
 
             <a
-              href={'https://quickflarehit.com/cf/click/2'} // Updated Link
+              href={affiliateLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleTrackClick}
+              onClick={handleButtonClick} // Fires the API call when clicked
             >
               <Button variant="hero" size="xl" className="w-full sm:w-auto">
                 Claim Your $5 Bonus

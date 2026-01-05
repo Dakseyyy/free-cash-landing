@@ -1,18 +1,52 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { useSearchParams } from "react-router-dom"; // Essential import
+import { useSearchParams } from "react-router-dom"; 
+
+// ⚠️ YOUR TIKTOK ACCESS TOKEN
+const TIKTOK_ACCESS_TOKEN = "389eb2f05805015f2151bba7b8f8cfbb446dfd79"; 
 
 const HeroSection = () => {
-  const handleTrackClick = (e: React.MouseEvent) => {
-    // 1. Stop React from trying to handle the link internally
-    e.preventDefault();
+  const [searchParams] = useSearchParams();
 
-    // 2. Snapchat Tracking (remnant)
+  // 1. Get the ttclid from the URL
+  const ttclid = searchParams.get("ttclid");
 
+  // 2. Construct the Affiliate Link dynamically
+  const baseUrl = "https://gloffers.org/aff_c?offer_id=3273&aff_id=158638";
+  const affiliateLink = ttclid 
+    ? `${baseUrl}&aff_sub=${ttclid}&ttclid=${ttclid}` 
+    : baseUrl;
 
-    // 3. FORCE the redirect to ClickFlare
-    // This bypasses 'about:blank' by triggering a fresh browser navigation
-    window.location.href = "https://quickflarehit.com/cf/click/1";
+  // 3. Handle the Button Click / Event Firing
+  const handleButtonClick = async () => {
+    const eventPayload = {
+      event_source: "web",
+      event_source_id: "D5DOJBJC77UEMHG8RJK0", 
+      data: [
+        {
+          event: "ViewContent",
+          event_time: Math.floor(Date.now() / 1000), // Current Unix Timestamp
+          event_id: crypto.randomUUID(), // Unique ID for deduplication
+          user: {
+            ttclid: ttclid || null
+          }
+        }
+      ]
+    };
+
+    try {
+      await fetch("https://business-api.tiktok.com/open_api/v1.3/event/track/", {
+        method: "POST",
+        headers: {
+          "Access-Token": TIKTOK_ACCESS_TOKEN,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eventPayload),
+      });
+      console.log("TikTok event sent successfully");
+    } catch (error) {
+      console.error("Failed to send TikTok event", error);
+    }
   };
 
   return (
@@ -40,10 +74,10 @@ const HeroSection = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up animation-delay-600">
             <a
-              href={'https://quickflarehit.com/cf/click/1'}
+              href={affiliateLink} // Updated Link
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleTrackClick}
+              onClick={handleButtonClick} // Attached Event Handler
             >
               <Button variant="hero" size="xl">
                 Get Started
