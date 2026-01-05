@@ -3,7 +3,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { useSearchParams } from "react-router-dom"; 
 
 // ⚠️ YOUR TIKTOK ACCESS TOKEN
-const TIKTOK_ACCESS_TOKEN = "389eb2f05805015f2151bba7b8f8cfbb446dfd79"; 
+const TIKTOK_ACCESS_TOKEN = "2eed5327adf0bc66a279c00f1dd71225fa744d13"; 
 
 const HeroSection = () => {
   const [searchParams] = useSearchParams();
@@ -21,7 +21,7 @@ const HeroSection = () => {
   const handleButtonClick = async () => {
     const eventPayload = {
       event_source: "web",
-      event_source_id: "D5DOJBJC77UEMHG8RJK0", 
+      event_source_id: "D5DUHJJC77U7EM1QCA60", 
       data: [
         {
           event: "ViewContent",
