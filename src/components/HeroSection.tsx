@@ -2,31 +2,33 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useSearchParams } from "react-router-dom"; 
 
-// ⚠️ YOUR TIKTOK ACCESS TOKEN
-const TIKTOK_ACCESS_TOKEN = "5f56b23c05c15be6e685209b53eae36112133bb0"; 
+// ⚠️ YOUR TIKTOK CONFIG
+const TIKTOK_ACCESS_TOKEN = "155f3abb53fe684ccc8c2c219885e190e42e6a1c"; 
+const TIKTOK_PIXEL_ID = "D62DNO3C77UDCQ157CLG";
 
 const HeroSection = () => {
   const [searchParams] = useSearchParams();
 
-  // 1. Get the ttclid from the URL
+  // 1. Get the ttclid from the URL (TikTok Click ID)
   const ttclid = searchParams.get("ttclid");
 
   // 2. Construct the Affiliate Link dynamically
-  const baseUrl = "https://gloffers.org/aff_c?offer_id=3273&aff_id=158638";
+  const baseUrl = "https://gloffers.org/aff_c?offer_id=2691&aff_id=158638";
+  // Passing ttclid to 'aff_sub' so the network can pass it back to your server later
   const affiliateLink = ttclid 
     ? `${baseUrl}&aff_sub=${ttclid}&ttclid=${ttclid}` 
     : baseUrl;
 
-  // 3. Handle the Button Click / Event Firing
+  // 3. Direct Browser-to-TikTok API Call
   const handleButtonClick = async () => {
     const eventPayload = {
       event_source: "web",
-      event_source_id: "D5F2FBRC77UFRULIV070", 
+      event_source_id: TIKTOK_PIXEL_ID, 
       data: [
         {
           event: "ViewContent",
-          event_time: Math.floor(Date.now() / 1000), // Current Unix Timestamp
-          event_id: crypto.randomUUID(), // Unique ID for deduplication
+          event_time: Math.floor(Date.now() / 1000),
+          event_id: crypto.randomUUID(), 
           user: {
             ttclid: ttclid || null
           }
@@ -74,10 +76,10 @@ const HeroSection = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up animation-delay-600">
             <a
-              href={affiliateLink} // Updated Link
+              href={affiliateLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleButtonClick} // Attached Event Handler
+              onClick={handleButtonClick}
             >
               <Button variant="hero" size="xl">
                 Get Started

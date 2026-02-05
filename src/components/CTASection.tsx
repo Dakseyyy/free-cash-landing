@@ -2,18 +2,19 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Gift } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 
-// ⚠️ PASTE YOUR TIKTOK ACCESS TOKEN HERE
-const TIKTOK_ACCESS_TOKEN = "5f56b23c05c15be6e685209b53eae36112133bb0"; 
+// ⚠️ YOUR TIKTOK CONFIG
+const TIKTOK_ACCESS_TOKEN = "155f3abb53fe684ccc8c2c219885e190e42e6a1c"; 
+const TIKTOK_PIXEL_ID = "D62DNO3C77UDCQ157CLG";
 
 const CTASection = () => {
   const [searchParams] = useSearchParams();
   
-  // 1. Get the ttclid from the URL
+  // 1. Get the ttclid from the TikTok URL
   const ttclid = searchParams.get("ttclid");
 
-  // 2. Construct the Affiliate Link dynamically
-  const baseUrl = "https://gloffers.org/aff_c?offer_id=3273&aff_id=158638";
-  // We append ttclid to 'aff_sub' and 'ttclid' so the network catches it
+  // 2. Construct the Affiliate Link
+  const baseUrl = "https://gloffers.org/aff_c?offer_id=2691&aff_id=158638";
+  // We send ttclid as 'aff_sub' so the network can send it back to our /tracking server
   const affiliateLink = ttclid 
     ? `${baseUrl}&aff_sub=${ttclid}&ttclid=${ttclid}` 
     : baseUrl;
@@ -22,12 +23,12 @@ const CTASection = () => {
   const handleButtonClick = async () => {
     const eventPayload = {
       event_source: "web",
-      event_source_id: "D5F2FBRC77UFRULIV070", 
+      event_source_id: TIKTOK_PIXEL_ID, 
       data: [
         {
           event: "ViewContent",
-          event_time: Math.floor(Date.now() / 1000), // Current Unix Timestamp
-          event_id: crypto.randomUUID(), // Random ID for deduplication
+          event_time: Math.floor(Date.now() / 1000),
+          event_id: crypto.randomUUID(), 
           user: {
             ttclid: ttclid || null 
           }
@@ -36,7 +37,6 @@ const CTASection = () => {
     };
 
     try {
-      // Sending directly to TikTok Business API
       await fetch("https://business-api.tiktok.com/open_api/v1.3/event/track/", {
         method: "POST",
         headers: {
@@ -82,7 +82,7 @@ const CTASection = () => {
               href={affiliateLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleButtonClick} // Fires the API call when clicked
+              onClick={handleButtonClick}
             >
               <Button variant="hero" size="xl" className="w-full sm:w-auto">
                 Claim Your $5 Bonus
